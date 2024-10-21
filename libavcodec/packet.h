@@ -295,6 +295,18 @@ enum AVPacketSideDataType {
      */
     AV_PKT_DATA_DYNAMIC_HDR10_PLUS,
 
+    /* Provides the original PTS when passed through the demux.  This can
+    * be used to offset any subsequent changes made by the caller to
+    * adjust PTS values (such as pts_offset).  We need this for SCTE-35,
+    * since by the time the packets reach the output the PTS values have
+    * already been re-written, and we cannot calculate pre-roll values
+    * using the PTS values embedded in the packet content
+    * Format for this data can be found in AVTransportTimestamp struct
+    */
+
+AV_PKT_DATA_TRANSPORT_TIMESTAMP,
+
+
     /**
      * IAMF Mix Gain Parameter Data associated with the audio frame. This metadata
      * is in the form of the AVIAMFParamDefinition struct and contains information
